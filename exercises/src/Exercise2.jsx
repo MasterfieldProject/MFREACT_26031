@@ -11,6 +11,7 @@ export default class SzemelyData extends React.Component {
 
         return (
             <div>
+                <h1>{this.props.title}</h1>
                 <table border="1">
                     <thead>
                         <tr>
