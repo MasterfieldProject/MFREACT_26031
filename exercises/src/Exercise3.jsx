@@ -22,7 +22,7 @@ export default class SpeedLimit extends React.Component {
                     <input type="range" min="0" max="200" value={this.state.speed}
                         onChange={this.handleChange} />
                 </div>
-                {this.state.speed > 50 && <img src={table50} alt="speed limit exceeded" width="50" />}
+                {this.state.speed > 50 && <img src={table50} alt="speed limit exceeded" style={{ width: '10%', height: '10%' }} />}
             </>
         )
     }
