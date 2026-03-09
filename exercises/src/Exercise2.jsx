@@ -1,5 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Szemely from "./Exercise1.js";
+
 
 export default class SzemelyData extends React.Component {
 
@@ -38,3 +40,9 @@ export default class SzemelyData extends React.Component {
     }
 
 };
+
+SzemelyData.propTypes = {
+    title: PropTypes.string.isRequired,
+    list: PropTypes.array.isRequired,
+    color: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
