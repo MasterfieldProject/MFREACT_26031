@@ -1,5 +1,15 @@
 let unused = 10;
 
+function getCRC(number) {
+    let CRC = 0;
+    number.forEach((n, idx) => {
+        CRC += n * idx;
+    })
+    CRC %= 11;
+
+    return CRC;
+}
+
 function getWeather(day, weather = "esős", ...moreArgs) {
     console.log("Ma , " + day + " " + weather + " idő van.");
     for (let i = 0; i < moreArgs.length; i++) {
@@ -47,8 +57,17 @@ class Szemely {
         }
 
         // valid születési idő
+        const numOfDays = Math.floor((this.szuletesiido - new Date(1867, 0, 1)) / (1000 * 60 * 60 * 24));
+        if (adoArray.slice(1, 6).join('') != numOfDays) {
+            console.log("Nem egyezik az eltelt napok száma!")
+            return { valid: false, msg: 'Nem egyezik az eltelt napok száma!' };
+        }
 
         // valid CRC kód
+        if (getCRC(adoArray.slice(0, 9)) != adoArray[9]) {
+            console.log("CRC hiba!")
+            return { valid: false, msg: 'CRC hiba!' };
+        }
 
         return { valid: true, msg: '' };
     }
