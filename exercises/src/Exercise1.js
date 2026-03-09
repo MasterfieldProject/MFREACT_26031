@@ -29,7 +29,7 @@ arr[100] = 4;
 console.log(arr[10]);
 console.log(arr.length);
 
-class Szemely {
+export default class Szemely {
     constructor() {
         this.nev = '';
         this.szuletesiido = '';
