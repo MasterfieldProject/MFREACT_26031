@@ -12,6 +12,9 @@ export default class SzemelyData extends React.Component {
         return (
             <div>
                 <h1>{this.props.title}</h1>
+                <ul>
+                    {this.props.list.map((item, index) => <li key={index}>{item}</li>)}
+                </ul>
                 <table border="1">
                     <thead>
                         <tr>

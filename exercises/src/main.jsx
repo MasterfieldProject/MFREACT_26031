@@ -7,6 +7,6 @@ import './Exercise1.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App title="Személyi adatok" />
+    <App title="Személyi adatok" list={['Edit', 'Delete', 'View', 'Update']} />
   </StrictMode>,
 )
