@@ -10,10 +10,6 @@ export default function Game() {
     const [ival, setIval] = useState(3000);
     const [label, setLabel] = useState(getRandomChar());
 
-    useEffect(() => {
-        const timerID = setInterval(() => tick(), ival);
-    }, []); // mount, unmount
-
     function tick() {
         setX(getRandom().x);
         setY(getRandom().y);
@@ -21,11 +17,32 @@ export default function Game() {
         setLabel(getRandomChar());
     }
 
+    useEffect(() => {
+        const timerID = setInterval(() => tick(), ival);
+
+        return () => {
+            clearInterval(timerID);
+        }
+    }, [ival]); // mount, unmount, ival modositasa
+
+    function handleKeyDown(e) {
+        if (e.key === label.toLowerCase()) {
+            setCatched(prev => prev + 1);
+            setIval(prev => prev - 100);
+        } else {
+            setMissed(prev => prev + 1);
+        }
+
+        setX(getRandom().x);
+        setY(getRandom().y);
+        setLabel(getRandomChar());
+    }
+
     return (
         <div>
             <div>
                 <Button style={{ height: 100, width: 100, position: 'absolute', top: y, left: x }}
-                    onKeyDown="">{label}</Button>
+                    onKeyDown={handleKeyDown}>{label}</Button>
             </div>
             <div style={{ position: 'absolute', top: 600, left: 500 }}>
                 Elkapott={catched}<br />
