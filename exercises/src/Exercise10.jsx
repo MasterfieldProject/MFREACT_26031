@@ -18,11 +18,18 @@ export default function Form() {
         validtaxnum: false
     });
 
-    const handleSubmit = (e) => { };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (formData.name === '') {
+            setFormData({ ...formData, errormsg: 'A név megadása kötelező!' });
+            return;
+        }
 
-    function handleChangeName(event) {
-        if (event.target.value.match("^[a-zA-Z\\s]*$") != null) {
-            setFormData({ ...formData, name: event.target.value });
+    };
+
+    const handleChangeName = (e) => {
+        if (e.target.value.match("^[a-zA-Z\\s]*$") != null) {
+            setFormData({ ...formData, name: e.target.value });
         }
     }
 
