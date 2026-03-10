@@ -7,7 +7,8 @@ export default class MouseTracker extends React.Component {
         super(props);
         this.state = {
             mouseX: 0,
-            mouseY: 0
+            mouseY: 0,
+            inputText: "",
         }
     }
 
@@ -19,12 +20,22 @@ export default class MouseTracker extends React.Component {
         this.setState({ mouseX: event_offsetX, mouseY: Math.floor(event_offsetY) });
     }
 
+    handleInput = (event) => {
+        this.setState({ inputText: event.target.value });
+    }
+
     render() {
         return (
-            <div>
-                <img src={cloud} onMouseMove={this.handleMouseMove} /><br />
-                {this.state.mouseX} px / {this.state.mouseY} px
-            </div>
+            <>
+                <div>
+                    <img src={cloud} onMouseMove={this.handleMouseMove} /><br />
+                    {this.state.mouseX} px / {this.state.mouseY} px
+                </div>
+                <div>
+                    <input onChange={this.handleInput} value={this.state.inputText} /><br /><br />
+                    <input readOnly value={this.state.inputText.split("").reverse().join("")} />
+                </div>
+            </>
         )
 
     }
