@@ -20,6 +20,7 @@ export default class ProgressIndicator extends React.Component {
         let newPos = Math.floor(scrollTop / totalDocScrollLength * 100);
 
         this.setState({ scrollPosition: newPos });
+        document.title = `Scrolled ${newPos}%`; // címben is megjeleníti a scrollozás mértékét
     }
 
     componentDidMount() {
