@@ -7,6 +7,7 @@ export default class Clock extends React.Component {
         this.state = {
             time: new Date()
         };
+        this.timerID = null;
     }
 
     componentDidMount() {
