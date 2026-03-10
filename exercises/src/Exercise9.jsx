@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
 export default function Game() {
@@ -9,6 +9,17 @@ export default function Game() {
     const [missed, setMissed] = useState(0);
     const [ival, setIval] = useState(3000);
     const [label, setLabel] = useState(getRandomChar());
+
+    useEffect(() => {
+        const timerID = setInterval(() => tick(), ival);
+    }, []); // mount, unmount
+
+    function tick() {
+        setX(getRandom().x);
+        setY(getRandom().y);
+        setMissed(prev => prev + 1);
+        setLabel(getRandomChar());
+    }
 
     return (
         <div>
