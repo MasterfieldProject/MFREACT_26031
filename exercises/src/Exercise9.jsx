@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, use } from 'react';
 import { Button } from 'react-bootstrap';
 
 export default function Game() {
@@ -9,13 +9,19 @@ export default function Game() {
     const [missed, setMissed] = useState(0);
     const [ival, setIval] = useState(3000);
     const [label, setLabel] = useState(getRandomChar());
+    const button = useRef(null);
 
     function tick() {
         setX(getRandom().x);
         setY(getRandom().y);
         setMissed(prev => prev + 1);
         setLabel(getRandomChar());
+        button.current.focus();
     }
+
+    useEffect(() => {
+        button.current.focus();
+    }, []); // csak mountolaskor fut le
 
     useEffect(() => {
         const timerID = setInterval(() => tick(), ival);
@@ -42,7 +48,7 @@ export default function Game() {
         <div>
             <div>
                 <Button style={{ height: 100, width: 100, position: 'absolute', top: y, left: x }}
-                    onKeyDown={handleKeyDown}>{label}</Button>
+                    onKeyDown={handleKeyDown} ref={button}>{label}</Button>
             </div>
             <div style={{ position: 'absolute', top: 600, left: 500 }}>
                 Elkapott={catched}<br />
