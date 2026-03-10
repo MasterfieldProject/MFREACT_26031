@@ -25,6 +25,10 @@ export default function Form() {
             return;
         }
 
+        if (formData.gender === '') {
+            setFormData({ ...formData, errormsg: 'Kötelező a nem kiválasztása!' });
+            return;
+        }
     };
 
     const handleChangeName = (e) => {
@@ -32,6 +36,8 @@ export default function Form() {
             setFormData({ ...formData, name: e.target.value });
         }
     }
+
+    let handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     return <form method="post" onSubmit={handleSubmit}>
         <Card style={{ margin: '20px', width: '100%' }} bg="info" text="white">
@@ -42,6 +48,9 @@ export default function Form() {
                     <input type="text" name="name" value={formData.name} onChange={handleChangeName} maxLength="25" />
                 </label>
                 <br />
+                <input type="radio" name="gender" value='male' onChange={handleChange} /> Férfi<br />
+                <input type="radio" name="gender" value='female' onChange={handleChange} /> Nő<br />
+
                 <br />
                 <br />
                 <input type='submit' value='Regisztráció' />
