@@ -1,0 +1,34 @@
+import { useState } from 'react';
+import { Button } from 'react-bootstrap';
+
+export default function Game() {
+    // state valtozok
+    const [x, setX] = useState(getRandom().x);
+    const [y, setY] = useState(getRandom().y);
+    const [catched, setCatched] = useState(0);
+    const [missed, setMissed] = useState(0);
+    const [ival, setIval] = useState(3000);
+    const [label, setLabel] = useState(getRandomChar());
+
+    return (
+        <div>
+            <div>
+                <Button style={{ height: 100, width: 100, position: 'absolute', top: y, left: x }}
+                    onKeyDown="">{label}</Button>
+            </div>
+            <div style={{ position: 'absolute', top: 600, left: 500 }}>
+                Elkapott={catched}<br />
+                Mellé={missed}<br />
+                Interval={ival}
+            </div>
+        </div>
+    );
+}
+
+function getRandom() {
+    return { x: Math.floor(Math.random() * 1000), y: Math.floor(Math.random() * 500) };
+}
+
+function getRandomChar() {
+    return String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase();
+}
