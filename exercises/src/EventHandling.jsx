@@ -28,6 +28,14 @@ export default class EventHandling extends React.Component {
         console.log(event.type);
     }
 
+    handleClickButton = (event) => {
+        console.log('handleClickButton event type=' + event.type);
+        event.stopPropagation();
+    }
+
+    handleDivClick = (event) => {
+        console.log('handleDivClick event type=' + event.type);
+    }
 
     render() {
         var msg = "This is a message";
@@ -39,6 +47,11 @@ export default class EventHandling extends React.Component {
                 </div>
                 <div>
                     <a href="https://hwsw.hu" onClick={this.handleClick}>LINK</a>
+                </div>
+                <div>
+                    <div onClick={this.handleDivClick}>Click
+                        <button onClick={this.handleClickButton} className="btn btn-primary">Button</button>
+                    </div>
                 </div>
             </>
         );
