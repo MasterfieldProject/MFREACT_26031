@@ -128,7 +128,8 @@ export default function Form() {
                 <label>
                     Adószám<br />
                     <input type="text" name="taxnumber" value={formData.taxnumber} onChange={handleChangeTaxnumber} />
-                    {formData.taxnumber !== '' && !formData.validtaxnumber && <span role="img" aria-label="mark">❗</span>}
+                    {formData.taxnumber !== '' && !formData.validtaxnumber && <span role="img" aria-label="mark"> ❌ </span>}
+                    {formData.taxnumber !== '' && formData.validtaxnumber && <span role="img" aria-label="mark"> ✅ </span>}
                 </label>
                 <br />
                 <br />
