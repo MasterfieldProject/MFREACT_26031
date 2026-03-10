@@ -15,11 +15,46 @@ export default class Game extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            this.state.interval
+        );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+            x: getRandom().x,
+            y: getRandom().y,
+            missed: this.state.missed + 1
+        });
+    }
+
+    handleMouseOver = () => {
+        this.setState({
+            x: getRandom().x,
+            y: getRandom().y,
+            catched: this.state.catched + 1,
+            interval: this.state.interval - 100
+        }, () => { // callback new timer
+            this.timerID = setInterval(
+                () => this.tick(),
+                this.state.interval
+            );
+        });
+        clearInterval(this.timerID);
+    }
+
     render() {
         return (
             <div>
                 <div>
-                    <img src={pacman} style={{ height: 50, position: 'absolute', top: this.state.y, left: this.state.x }} />
+                    <img src={pacman} style={{ height: 50, position: 'absolute', top: this.state.y, left: this.state.x }}
+                        onMouseOver={this.handleMouseOver} />
                 </div>
                 <div style={{ position: 'absolute', top: 600, left: 500 }}>
                     Elkapott={this.state.catched}<br />
