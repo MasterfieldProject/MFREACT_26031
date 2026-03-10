@@ -18,7 +18,7 @@ export default class Counter extends React.Component {
             // callback function, called after the state update is done
             this.setState({ hasButtonClicked: this.state.cnt > 0 })
         })
-            */
+
 
         /*
         for (let i = 0; i < 5; i++) {

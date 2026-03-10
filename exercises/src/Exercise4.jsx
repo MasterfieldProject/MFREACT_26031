@@ -9,6 +9,7 @@ export default class MouseTracker extends React.Component {
             mouseX: 0,
             mouseY: 0,
             inputText: "",
+            reverseText: ""
         }
     }
 
@@ -21,7 +22,7 @@ export default class MouseTracker extends React.Component {
     }
 
     handleInput = (event) => {
-        this.setState({ inputText: event.target.value });
+        this.setState({ inputText: event.target.value, reverseText: event.target.value.split("").reverse().join("") });
     }
 
     render() {
@@ -33,7 +34,7 @@ export default class MouseTracker extends React.Component {
                 </div>
                 <div>
                     <input onChange={this.handleInput} value={this.state.inputText} /><br /><br />
-                    <input readOnly value={this.state.inputText.split("").reverse().join("")} />
+                    <input readOnly value={this.state.reverseText} />
                 </div>
             </>
         )
