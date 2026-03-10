@@ -40,6 +40,16 @@ export default function Form() {
             return;
         }
 
+        if (formData.postcode === '') {
+            setFormData({ ...formData, errormsg: 'Kötelező az irányítószám megadása!' });
+            return;
+        }
+
+        if (formData.postcode.length !== 4) {
+            setFormData({ ...formData, errormsg: 'Irányítószám hibás formátumú!' });
+            return;
+        }
+
         setFormData({ ...formData, errormsg: 'OK' });
     };
 
@@ -91,6 +101,11 @@ export default function Form() {
         setFormData({ ...formData, taxnumber: taxnum, validtaxnumber: true });
     }
 
+    const handleChangePostcode = (e) => {
+        if (e.target.value.match("^[0-9]*$") != null) {
+            setFormData({ ...formData, postcode: e.target.value });
+        }
+    }
 
     let handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -125,11 +140,17 @@ export default function Form() {
                             setFormData({ ...formData, birthDate: date, taxnumber: '' });
                         }} />
                 </label>
+                <br />
                 <label>
                     Adószám<br />
                     <input type="text" name="taxnumber" value={formData.taxnumber} onChange={handleChangeTaxnumber} />
                     {formData.taxnumber !== '' && !formData.validtaxnumber && <span role="img" aria-label="mark"> ❌ </span>}
                     {formData.taxnumber !== '' && formData.validtaxnumber && <span role="img" aria-label="mark"> ✅ </span>}
+                </label>
+                <br />
+                <label>
+                    Irányítószám<br />
+                    <input type="text" name="postcode" value={formData.postcode} onChange={handleChangePostcode} maxLength="4" />
                 </label>
                 <br />
                 <br />
