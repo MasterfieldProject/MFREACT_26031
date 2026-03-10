@@ -1,4 +1,5 @@
 import React from 'react';
+import pacman from './pacman.jpg';
 
 export default class Game extends React.Component {
 
@@ -18,9 +19,15 @@ export default class Game extends React.Component {
         return (
             <div>
                 <div>
-                    
+                    <img src={pacman} style={{ height: 50, position: 'absolute', top: this.state.y, left: this.state.x }} />
+                </div>
+                <div style={{ position: 'absolute', top: 600, left: 500 }}>
+                    Elkapott={this.state.catched}<br />
+                    Mellé={this.state.missed}
                 </div>
             </div>
+        );
+    }
 
 }
 
