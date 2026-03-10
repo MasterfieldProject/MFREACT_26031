@@ -37,6 +37,10 @@ export default class EventHandling extends React.Component {
         console.log('handleDivClick event type=' + event.type);
     }
 
+    handleChildClick = (event) => {
+        console.log('handleChildClick event type=' + event.type);
+    }
+
     render() {
         var msg = "This is a message";
         return (
@@ -53,7 +57,20 @@ export default class EventHandling extends React.Component {
                         <button onClick={this.handleClickButton} className="btn btn-primary">Button</button>
                     </div>
                 </div>
+                <div>
+                    <Child ev1={this.handleChildClick} ev2={this.handleClick} />
+                </div>
             </>
         );
+    }
+}
+
+class Child extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return <button onClick={this.props.callbackFn} >Child</button>;
     }
 }
