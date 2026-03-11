@@ -10,7 +10,8 @@ export default function CurrencyCalc() {
 
     function getRates() {
         console.log('fetching rates');
-        const API = 'http://api.exchangerate.host/live?source=HUF&access_key=55525b9bbb220e5667acb9300e8e9406';
+        // const API = 'http://api.exchangerate.host/live?source=HUF&access_key=55525b9bbb220e5667acb9300e8e9406';
+        const API = 'http://localhost:3000/data'
 
         fetch(API, { method: 'GET' })
             .then(response => {
