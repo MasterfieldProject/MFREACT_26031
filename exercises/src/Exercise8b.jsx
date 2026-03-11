@@ -32,25 +32,24 @@ export default function BMICalculator() {
         }
     };
 
-    return (
-        <div>
-            <label>
-                Súly (kg):
-                <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
-            </label>
-            <br />
-            <label>
-                Magasság (cm):
-                <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
-            </label>
-            <br />
-            <button onClick={calcBMI}>
-                Számol
-            </button>
-            <br />
-            <strong>BMI: {bmi}</strong>
-            <br />
-            <strong>BMI index: {bmiIndex}</strong>
-        </div>
-    );
+    return <div>
+        <label>
+            Súly (kg):
+            <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
+        </label>
+        <br />
+        <label>
+            Magasság (cm):
+            <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
+        </label>
+        <br />
+        <button onClick={calcBMI}>
+            Számol
+        </button>
+        <br />
+        <strong>BMI: {bmi}</strong>
+        <br />
+        <strong>BMI index: {bmiIndex}</strong>
+    </div>
+
 }
