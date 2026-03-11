@@ -6,13 +6,13 @@ export default function CurrencyCalc() {
     const [rates, setRates] = useState({});
     const [amount, setAmount] = useState(0);
     const [selectedCur, setSelectedCur] = useState('');
-    const [errorMsg, setErrorMsg] = useState('');
+    const [errorMsg, setErrorMsg] = useState('OK');
 
     function getRates() {
         console.log('fetching rates');
         const API = 'http://api.exchangerate.host/live?source=HUF&access_key=55525b9bbb220e5667acb9300e8e9406';
 
-        fetch(API)
+        fetch(API, { method: 'GET' })
             .then(response => {
                 console.log('response received : ' + response.status);
                 if (!response.ok) {
