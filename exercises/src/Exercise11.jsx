@@ -44,5 +44,60 @@ const NotLoggedIn = () => <div>Nincs bejelentkezve!</div>;
 const NoMatch = () => <div>Nem található az oldal</div>;
 
 const Login = ({ isLoggedIn, login, logout }) => {
-    return isLoggedIn ? <Button variant="info" onClick={logout}>Kijelentkezés</Button> : <Button variant="primary" onClick={() => login('user', 'pass')}>Bejelentkezés</Button>
+    return isLoggedIn ?
+        <Button variant="info" onClick={logout}>Kijelentkezés</Button> :
+        <LoginDialog />
 };
+
+function LoginDialog() {
+    const [show, setShow] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    return <>
+        <Button variant="primary" onClick={() => setShow(true)}>Bejelentkezés</Button>
+        <Modal show={show} onHide={() => setShow(false)}>
+            <Modal.Header closeButton>
+                <Modal.Title>Bejelentkezés</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <form>
+                    <div className="form-group">
+                        <label htmlFor="username">Felhasználónév</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Jelszó</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    {error && (
+                        <Alert variant="danger">{error}</Alert>
+                    )}
+                </form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShow(false)}>
+                    Mégse
+                </Button>
+                <Button variant="primary" onClick={() => {
+                    // Handle login logic here
+                }}>
+                    Bejelentkezés
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    </>
+}
