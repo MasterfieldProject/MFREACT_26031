@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Card, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import "react-datepicker/dist/react-datepicker.css";
@@ -135,6 +135,9 @@ export default function Form() {
     var date1 = new Date();
     date1.setFullYear(date1.getFullYear() - 18);
 
+    const contextValue = useContext(CountiesContext);
+    console.log(contextValue);
+
     return <form method="post" onSubmit={handleSubmit}>
         <Card style={{ margin: '20px', width: '100%' }} bg="info" text="white">
             <Card.Body>
@@ -178,11 +181,14 @@ export default function Form() {
                 <br />
                 <label>
                     Megye<br />
-                    <select name="county" value={formData.county} onChange={handleChange} >
-                        <CountiesContext.Consumer>
-                            {counties => counties.map(county => <option key={county} value={county}>{county}</option>)}
-                        </CountiesContext.Consumer>
-                    </select>
+                    <CountiesContext.Provider value={[...contextValue, 'AAA', 'BBB']} >
+                        <select name="county" value={formData.county} onChange={handleChange} >
+                            <CountiesContext.Consumer>
+                                {counties => counties.map(county => <option key={county} value={county}>{county}</option>)}
+                            </CountiesContext.Consumer>
+                        </select>
+                        <Labels />
+                    </CountiesContext.Provider>
                 </label>
                 <br />
                 <br />
@@ -195,6 +201,13 @@ export default function Form() {
         </Card>
     </form >;
 
+}
+
+const Labels = () => {
+    const contextValue = useContext(CountiesContext);
+    return <div>
+        {contextValue.map(county => <span key={county}>{county} </span>)}
+    </div>
 }
 
 function getCRC(number) {
