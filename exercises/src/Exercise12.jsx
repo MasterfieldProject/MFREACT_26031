@@ -5,8 +5,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function CurrencyCalc() {
     const [rates, setRates] = useState({});
     const [amount, setAmount] = useState(0);
-    const [selectedCur, setSelectedCur] = useState('');
+    const [selectedCur, setSelectedCur] = useState('EUR');
     const [errorMsg, setErrorMsg] = useState('OK');
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+        if (name === 'amount') {
+            setAmount(value);
+        } else if (name === 'selectedCur') {
+            setSelectedCur(value);
+        }
+    }
 
     function getRates() {
         console.log('fetching rates');
@@ -37,14 +46,15 @@ export default function CurrencyCalc() {
     return <Container className="w-100" >
         <Row className="justify-content-md-center p-2">
             <Col md={3}>
-                <input name="amount" type="text" value={amount} className="form-control" />
+                <input name="amount" type="text" value={amount} onChange={handleChange} className="form-control" />
             </Col>
             <Col md={2}>
-                <select name="selectedCur" value={selectedCur} className="form-control">
+                <select name="selectedCur" value={selectedCur} onChange={handleChange} className="form-control">
+                    {Object.keys(rates).sort().map(i => <option key={i} value={i}>{i}</option>)}
                 </select >
             </Col>
             <Col md={5}>
-                <label className="form-control">= { } HUF</label>
+                <label className="form-control">= {(amount / rates[selectedCur]).toLocaleString('hu-HU', { maximumFractionDigits: 2 })} HUF</label>
             </Col>
 
         </Row>
