@@ -41,7 +41,12 @@ export default function UserApp() {
 const PersonalInfo = () => <div>Személyes adatok</div>;
 const Contact = () => <div>Kapcsolat</div>;
 const NotLoggedIn = () => <div>Nincs bejelentkezve!</div>;
-const NoMatch = () => <div>Nem található az oldal</div>;
+
+const NoMatch = () => {
+    let location = useLocation();
+
+    return <div>Nem található a keresett oldal (<code>{location.pathname}</code>)</div>;
+}
 
 const Login = ({ isLoggedIn, login, logout }) => {
     return isLoggedIn ?
