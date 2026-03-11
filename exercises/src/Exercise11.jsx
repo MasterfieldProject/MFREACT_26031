@@ -20,10 +20,17 @@ export default function UserApp() {
 
     return <Router>
         <Login isLoggedIn={isLoggedIn} login={login} logout={logout} />
-
+        <ul>
+            <li>
+                <Link to="/personal">Személyes adatok</Link>
+            </li>
+            <li>
+                <Link to="/contact">Kapcsolat</Link>
+            </li>
+        </ul>
         <Routes>
-            <Route path="/" element={<PersonalInfo />} />
-            <Route path="/personal" element={<PersonalInfo />} />
+            <Route path="/" element={isLoggedIn ? <PersonalInfo /> : <NotLoggedIn />} />
+            <Route path="/personal" element={isLoggedIn ? <PersonalInfo /> : <NotLoggedIn />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NoMatch />} />
         </Routes>
@@ -33,6 +40,7 @@ export default function UserApp() {
 
 const PersonalInfo = () => <div>Személyes adatok</div>;
 const Contact = () => <div>Kapcsolat</div>;
+const NotLoggedIn = () => <div>Nincs bejelentkezve!</div>;
 const NoMatch = () => <div>Nem található az oldal</div>;
 
 const Login = ({ isLoggedIn, login, logout }) => {
