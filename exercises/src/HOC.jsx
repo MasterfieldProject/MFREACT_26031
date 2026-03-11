@@ -1,7 +1,7 @@
 
 function BaseComponent(props) {
   return (
-    <div onClick={props.onClick}>
+    <div onClick={props.onClick} >
       <h1>{props.title}</h1>
       <p>{props.content}</p>
     </div>
@@ -17,7 +17,7 @@ const withLogger = (WrappedComponent) => {
 
     const { title, content } = props;
     return (
-      <div>
+      <div id={123} arial-label="szöveg" >
         <WrappedComponent {...props} onClick={onClick} />
       </div>
     );
