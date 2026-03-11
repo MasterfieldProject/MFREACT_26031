@@ -46,14 +46,22 @@ const NoMatch = () => <div>Nem található az oldal</div>;
 const Login = ({ isLoggedIn, login, logout }) => {
     return isLoggedIn ?
         <Button variant="info" onClick={logout}>Kijelentkezés</Button> :
-        <LoginDialog />
+        <LoginDialog login={login} />
 };
 
-function LoginDialog() {
+function LoginDialog({ login }) {
     const [show, setShow] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+
+    function handleLogin() {
+        if (login(username, password)) {
+            setShow(false);
+        } else {
+            setError('Hibás felhasználónév vagy jelszó!');
+        }
+    }
 
     return <>
         <Button variant="primary" onClick={() => setShow(true)}>Bejelentkezés</Button>
@@ -83,20 +91,12 @@ function LoginDialog() {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    {error && (
-                        <Alert variant="danger">{error}</Alert>
-                    )}
+                    {error && <Alert variant="danger">{error}</Alert>}
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShow(false)}>
-                    Mégse
-                </Button>
-                <Button variant="primary" onClick={() => {
-                    // Handle login logic here
-                }}>
-                    Bejelentkezés
-                </Button>
+                <Button variant="secondary" onClick={() => setShow(false)}>Mégse</Button>
+                <Button variant="primary" onClick={handleLogin}>Bejelentkezés</Button>
             </Modal.Footer>
         </Modal>
     </>
